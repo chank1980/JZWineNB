@@ -1,0 +1,51 @@
+﻿@model IEnumerable<JZWineNB.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Comments</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th> </th>
+        <th>@Html.DisplayNameFor(model => model.Drinker.Alias)</th>
+        <th>@Html.DisplayNameFor(model => model.Wine.Name)</th>        
+        <th>@Html.DisplayNameFor(model => model.Date)</th>
+        <th>@Html.DisplayNameFor(model => model.Comment1)</th>
+        @*<th>@Html.DisplayNameFor(model => model.Rate)</th>*@
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td><img src="@Url.Content(item.Drinker.DrinkerImage)" height="60" width="30" /></td>
+        <td>@Html.DisplayFor(modelItem => item.Drinker.Alias)</td>
+        <td>@Html.DisplayFor(modelItem => item.Wine.Name)</td>                
+        @* override text box style*@
+        <td>@Html.TextBoxFor(modelItem => item.Date, "{0:d MMM yy}" , new { 
+           style ="width:85px; border:none; background-Color:#f5f5f5;"
+           ,disabled = "disabled" })</td>
+
+        <td>@Html.DisplayFor(modelItem => item.Comment1)
+        
+            @*/*Pass rate to star rating*/*@
+            @{
+                var idRatea = Html.ValueFor(modelItem => item.Rate);
+            }
+                @Html.Partial("_wineRate", idRatea)        
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommentID }, new {@class="btn btn-default btn-sm" })
+            @Html.ActionLink("Details", "Details", new { id=item.CommentID }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentID }, new { @class = "btn btn-default btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,61 @@
+﻿@model JZWineNB.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Comment Detail</h2>
+
+<div>
+   
+    <hr />
+    <div class="container">
+        <div class="col-xs-9">
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Drinker.Alias)</dt>
+                <dd>@Html.DisplayFor(model => model.Drinker.Alias)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.Wine.Name)</dt>
+                <dd>@Html.DisplayFor(model => model.Wine.Name)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.Date)</dt>
+                <dd>@Html.DisplayFor(model => model.Date)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.Comment1)</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Comment1)
+
+
+                    @*/*Pass rate to star rating*/*@
+                    @{
+                        var idRatea = Html.ValueFor(model => model.Rate);
+                    }
+                    @Html.Partial("_wineRate", idRatea)
+                </dd>
+
+
+            </dl>
+        </div>
+        <div class="col-xs-3">
+            <div class="form-group">
+                <div class="col-xs-3 text-center">
+                    <img src="@Url.Content(Model.Drinker.DrinkerImage)" height="100" style="border:double" />
+                    <br /><br/>
+                </div>
+            </div>
+        </div>
+    
+
+        <div class="col-xs-3">
+            <div class="form-group">
+                <div class="col-xs-3 text-center">
+                    <img src="@Url.Content(Model.Wine.WineImage)" height="100" style="border:double" />
+                </div>
+            </div>
+        </div>
+        </div> @*/*end of container*/*@
+</div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CommentID }, new { @class = "btn btn-primary btn-sm" })|
+            @Html.ActionLink("Back to List", "Index")
+        </p>

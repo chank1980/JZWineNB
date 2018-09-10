@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JZWineNBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rate" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="Date" Type="DateTime" Precision="7" />
+    <Property Name="Comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DrinkerID" Type="Int32" Nullable="false" />
+    <Property Name="WineID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Drinker" Relationship="Self.FK_Comment_Drinker" FromRole="Comment" ToRole="Drinker" />
+    <NavigationProperty Name="Wine" Relationship="Self.FK_Comment_Wine" FromRole="Comment" ToRole="Wine" />
+  </EntityType>
+  <EntityType Name="Drinker">
+    <Key>
+      <PropertyRef Name="DrinkerID" />
+    </Key>
+    <Property Name="DrinkerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrinkerImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Drinker" FromRole="Drinker" ToRole="Comment" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Wine">
+    <Key>
+      <PropertyRef Name="WineID" />
+    </Key>
+    <Property Name="WineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WineType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Grape" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Body" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AlcoholVol" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="RateOverall" Type="Decimal" Precision="3" Scale="1" />
+    <Property Name="WineImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Wine" FromRole="Wine" ToRole="Comment" />
+  </EntityType>
+  <Association Name="FK_Comment_Drinker">
+    <End Role="Drinker" Type="Self.Drinker" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drinker">
+        <PropertyRef Name="DrinkerID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="DrinkerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Wine">
+    <End Role="Wine" Type="Self.Wine" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wine">
+        <PropertyRef Name="WineID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="WineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JZWineNBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Drinkers" EntityType="Self.Drinker" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Wines" EntityType="Self.Wine" />
+    <AssociationSet Name="FK_Comment_Drinker" Association="Self.FK_Comment_Drinker">
+      <End Role="Drinker" EntitySet="Drinkers" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Wine" Association="Self.FK_Comment_Wine">
+      <End Role="Wine" EntitySet="Wines" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

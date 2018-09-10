@@ -1,0 +1,102 @@
+﻿@model IEnumerable<JZWineNB.Models.Wine>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>List of Wines</h2>
+<div class="btn btn-default">   
+        @Html.ActionLink("Add Wine", "Create")   
+</div>
+
+@*//add dropdown list for the searchString in contoller*@
+@*// put in beginform to trigger refresh when filter is click*@
+@using (Html.BeginForm())
+{
+    <p id="wineTop">
+        Type : @Html.DropDownList("wineType", "All")
+        Grape : @Html.TextBox("searchString")
+        <input type="submit" value="Filter" class="btn-default" />
+        <p class="denote">To add wine comment use Details and Comments button</p>
+    </p>
+}
+ 
+<table class="table">
+    <tr>
+        <th>@Html.Label("Wine")</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WineType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grape)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Region)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img src="@Url.Content(item.WineImage)" height="80" width="40" /></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WineType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grape)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+           
+            <td>
+                <div class="col-sm-12" id="longText">
+                    
+                    @Html.DisplayFor(modelItem => item.Description)
+                  
+                    @*/*Pass rate to star rating*/*@           
+                    @{  
+                       var idRatea =Html.ValueFor(modelItem=>item.RateOverall);
+                    }
+                         @Html.Partial("_wineRate", idRatea)
+                </div>
+            </td>
+            
+
+
+            <td>
+                
+                @Html.ActionLink("Edit", "Edit", new { id = item.WineID }, new { @class="btn btn-default btn-xs"})
+                @Html.ActionLink("Delete", "Delete", new { id = item.WineID }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Details & Comments", "Details", new { id = item.WineID }, new { @class = "btn btn-default btn-xs" })
+                
+            </td>
+
+        </tr>
+
+
+    }
+
+</table>
+
+

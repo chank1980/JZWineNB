@@ -1,0 +1,85 @@
+﻿@model JZWineNB.Models.Comment
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Comment</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
+
+        @*To keep all keys values unchanged*@
+        @Html.HiddenFor(model => model.CommentID)
+        @Html.HiddenFor(model=>model.WineID)
+        @Html.HiddenFor(model=>model.DrinkerID)
+      
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.WineID, "Wine", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                    
+                    @Html.EditorFor(model => model.Wine.Name, new { htmlAttributes = new { @class = "form-control" , disabled="disabled" } })
+                    @Html.ValidationMessageFor(model => model.WineID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.DrinkerID, "DrinkerID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.EditorFor(model => model.Drinker.Alias, new { htmlAttributes = new { @class = "form-control", disabled="disabled" } })
+                @Html.ValidationMessageFor(model => model.DrinkerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span class="denote">Please re-enter the date</span>
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment1,"Comment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">               
+                @Html.TextAreaFor(model => model.Comment1, 5, 700, new { htmlAttributes = new {@class="comment" }})
+                @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+                           
+                @*@{ 
+                    var idRate = Html.ValueFor(model=>model.Rate);
+                }*@
+                <span class="denote">Please re-enter the rating to register the rate</span>
+                @Html.Partial("_rateNow", Model.Rate)
+                
+                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+           
+        </div>
+
+
+        
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -1,0 +1,91 @@
+﻿@model JZWineNB.viewmodels.CommentWineVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Comment</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+        <div class="col-sm-offset-2">
+            <span class="denote"> Click Alias from top menu to browse the photos of the Aliases</span>
+        </div>
+        <div class="form-group">           
+            @Html.LabelFor(model => model.DrinkerID, "DrinkerID", htmlAttributes: new { @class = "control-label col-md-2" })
+                
+                    <div class="col-md-10">                       
+                        @Html.DropDownList("DrinkerID", null, htmlAttributes: new { @class = "form-control", @id = "alias" })
+                        @Html.ValidationMessageFor(model => model.DrinkerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+        
+        <fieldset hidden>
+            <div class="form-group">
+                @Html.LabelFor(model => model.WineID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.WineID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WineID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>      
+             
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(model => model.WineID, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                    
+                    @Html.TextBoxFor(x => x.Name,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WineID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment1,"Comment" ,htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+               
+                @Html.TextArea("Comment1","  " , 4, 700, new { htmlAttributes = new { @class = "comments" } })                              
+                @Html.ValidationMessageFor(model => model.Comment1, " ", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+            @{
+                var idRate = Html.ValueFor(model => model.Rate);
+            }
+            @Html.Partial("_rateNow", idRate)
+
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<div>    
+    @Html.ActionLink("Back to Wine List", "Index", "Wine")
+</div>
+
+ 
+

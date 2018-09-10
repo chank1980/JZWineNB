@@ -1,0 +1,137 @@
+﻿@model JZWineNB.Models.Wine
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Wine</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.WineID)
+
+        <div class="container">
+            <div class="col-xs-9">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WineType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <div>
+                            @Html.Label("Red", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.RadioButtonFor(model => model.WineType, "Red", new { value = "Red" })
+                            @Html.Label("White")
+                            @Html.RadioButtonFor(model => model.WineType, "White", new { value = "White" })
+                            @Html.Label("Rose")
+                            @Html.RadioButtonFor(model => model.WineType, "Rose", new { value = "Rose" })
+                            @Html.ValidationMessageFor(model => model.WineType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Grape, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Grape, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Grape, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">                        
+                        @Html.DropDownListFor(m => m.Body, new SelectList(new[] { "Full", "Medium", "Light", "Dry","Medium Dry", "Sweet" }), "Select...")
+                        @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AlcoholVol, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AlcoholVol, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AlcoholVol, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <fieldset hidden>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RateOverall, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.RateOverall, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RateOverall, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WineImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WineImage, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WineImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="wine-Description">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Description, 5, 700, new { htmlAttributes = new { @class = "comments" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-3">
+                <div class="form-group">                   
+                    <div class="col-xs-3 text-center">
+                        <img src="@Url.Content(Model.WineImage)" height="300" style="border:double" />
+                    </div>
+                </div>
+            </div>
+
+        </div> @*/*end of container*/*@
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+
+   </div>
+}
+
+
+    <div>        
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+

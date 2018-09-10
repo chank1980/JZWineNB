@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
+
+<div class="container">
+    <div class="col-xs-4">
+        <br/>
+        <br/>
+        <img src="@Url.Content("~/Content/Images/JZ_notebook.jpg")" alt="image" class="img-responsive" />       
+    </div>
+    <div class="col-xs-8">
+        <h3> About this project</h3>
+        <p>This project contains a database with 3 tables, using MVC to build all of the views, 
+        Linq and Lambda expressions to select and manipulate data. 
+        I have created a view model to build one of views and 
+        partial views to display the star rating.</p>
+        <p>I used dropdown lists for the wine types and body to keep the database input tidy and 
+        standard, I refactored the process of re-calculating the over all rate to a method to avoid repeating
+         codes in various ActionResults.</p>
+        <p>The star rating is a plugin from a vendor, I amended the jquery to suit this project.</p>
+        <br />
+        <p>This project has brought me to a higher level of understanding and knowledge of C#, ASP.NET MVC,
+        bootstrap and brushed on plugin and jquery.</p>
+    </div>
+
+</div>
+

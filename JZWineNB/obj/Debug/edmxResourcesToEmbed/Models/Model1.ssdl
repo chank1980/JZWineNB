@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JZWineNBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rate" Type="decimal" Precision="3" Scale="2" />
+    <Property Name="Date" Type="datetime2" Precision="7" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="DrinkerID" Type="int" Nullable="false" />
+    <Property Name="WineID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Drinker">
+    <Key>
+      <PropertyRef Name="DrinkerID" />
+    </Key>
+    <Property Name="DrinkerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Alias" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="DrinkerImage" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Wine">
+    <Key>
+      <PropertyRef Name="WineID" />
+    </Key>
+    <Property Name="WineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="WineType" Type="varchar" MaxLength="50" />
+    <Property Name="Grape" Type="varchar" MaxLength="50" />
+    <Property Name="Region" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Body" Type="varchar" MaxLength="50" />
+    <Property Name="AlcoholVol" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="RateOverall" Type="decimal" Precision="3" Scale="1" />
+    <Property Name="WineImage" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Comment_Drinker">
+    <End Role="Drinker" Type="Self.Drinker" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drinker">
+        <PropertyRef Name="DrinkerID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="DrinkerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Wine">
+    <End Role="Wine" Type="Self.Wine" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wine">
+        <PropertyRef Name="WineID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="WineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JZWineNBModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Drinker" EntityType="Self.Drinker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wine" EntityType="Self.Wine" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comment_Drinker" Association="Self.FK_Comment_Drinker">
+      <End Role="Drinker" EntitySet="Drinker" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Wine" Association="Self.FK_Comment_Wine">
+      <End Role="Wine" EntitySet="Wine" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

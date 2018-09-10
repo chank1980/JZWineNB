@@ -1,0 +1,41 @@
+﻿@model IEnumerable<JZWineNB.Models.Drinker>
+@{
+    ViewBag.Title = "Alias";
+}
+
+<h2>Alias</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Gender:@Html.DropDownList("gender","All")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Alias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrinkerImage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Alias)</td>
+            <td>@Html.DisplayFor(modelItem => item.Gender)</td>            
+            <td><img src="@Url.Content(item.DrinkerImage)" height="80" width="60" /></td>
+            
+        </tr>
+    }
+
+</table>
+

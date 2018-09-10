@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="JZWineNBEntities1-Web.config Connection String" description="JZWineNBEntities1 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model1.csdl|res://*/Models.Model1.ssdl|res://*/Models.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\JZWineNB.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Kevin\\Desktop\\JZWineNB\\JZWineNB\\JZWineNB\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='JZWineNBEntities1']/@connectionString" />
+  </parameter>
+  <parameter name="JZWineNBEntities-Web.config Connection String" description="JZWineNBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model2.csdl|res://*/Models.Model2.ssdl|res://*/Models.Model2.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\JZWineNB.mdf;integrated security=True;multipleactiveresultsets=True;connect timeout=30;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Kevin\\Desktop\\JZWineNB\\JZWineNB\\JZWineNB\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='JZWineNBEntities']/@connectionString" />
+  </parameter>
+  <parameter name="JZWineNBEntities3-Web.config Connection String" description="JZWineNBEntities3 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model3.csdl|res://*/Models.Model3.ssdl|res://*/Models.Model3.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\JZWineNB.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Kevin\\Desktop\\JZWineNB\\JZWineNB\\JZWineNB\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='JZWineNBEntities3']/@connectionString" />
+  </parameter>
+</parameters>
